@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7q7j35dhaqw1"]
 
-[ext_resource type="Texture2D" uid="uid://cbhypkvel5xdx" path="res://icon.svg" id="1_ilw0m"]
+[ext_resource type="Texture2D" uid="uid://cbhypkvel5xdx" path="res://DynamicEventManager/addons/dynamic_event_manager/icon.png" id="1_ilw0m"]
 [ext_resource type="Script" path="res://test.gd" id="2_5xp75"]
 
 [node name="Test" type="Sprite2D"]
