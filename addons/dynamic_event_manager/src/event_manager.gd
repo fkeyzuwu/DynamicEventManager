@@ -46,4 +46,8 @@ func invoke(event: Event) -> void:
 	
 	var listeners = _events[event_type]
 	for i in range(listeners.size() - 1, -1, -1):
-		await listeners[i].call(event)
+		if listeners[i].get_object() != null:
+			await listeners[i].call(event)
+		else:
+			listeners.erase(listeners[i])
+
