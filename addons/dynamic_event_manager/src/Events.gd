@@ -12,8 +12,10 @@ func remove_listener(event_class: GDScript, method: Callable) -> void:
 	if !events.has(event_class):
 		return
 		
-	if events[event_class].has(method):
-		events[event_class].erase(method)
+	if _events[event_type].has(function):
+		_events[event_type].erase(function)
+		if _events[event_type].size() == 0:
+			_events.erase(event_type)
 		
 func invoke(event: Event) -> void:
 	var event_class = event.get_script()
@@ -21,6 +23,9 @@ func invoke(event: Event) -> void:
 	if !events.has(event_class):
 		return
 	
-	var listeners = events[event_class]
 	for i in range(listeners.size() - 1, -1, -1):
-		await listeners[i].call(event)
+		var func = listeners[i] as Callable
+		if func.is_null() or !func.is_valid():
+			listeners.remove_at(i)
+		else:
+			await func.call(event)
