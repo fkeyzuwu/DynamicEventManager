@@ -46,4 +46,8 @@ func invoke(event: Event) -> void:
 	
 	var listeners = _events[event_type]
 	for i in range(listeners.size() - 1, -1, -1):
-		await listeners[i].call(event)
+		var func = listeners[i] as Callable
+		if func.is_null() or !func.is_valid():
+			listeners.remove_at(i)
+		else:
+			await func.call(event)
